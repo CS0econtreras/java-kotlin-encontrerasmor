@@ -1,31 +1,33 @@
 package com.example.javabasics;
 
-public class Hat implements AutoCloseable{
-    //Primitive types in java
-    private boolean isOld; //True or False
-    private byte age;// -128 .. 127
+public class Hat implements AutoCloseable {
+    private boolean isOld = false; // true or false
+
+    private byte age; // -128 .. 127
     private short threadCount; // -32768 .. 32767
     private int priceInCents; // -2 billion .. + 2 billion
-    private long taxId; // -2^63-1
+    private long taxId; // -2^63 ... 2^63-1
+
     private float size; // base 2 representation (about 7 decimal digits mantessa ) x 10^(p/m 30)
     private double distToCenterOfUniverseInAngstroms; // like float 15 digits pm 300
 
-    private char x; // shows number between 0 .. 65535 (part of a UTF-16 multichar encoding in a string)
+    private char x; // 0 .. 65535 (part of a UTF-16 multichar encoding in a String
 
-    String name;
+    private String name;
 
-    Hat(float size, String name){
+    Hat(float size, String name) {
         this.size = size;
         this.name = name;
     }
-    Hat(float size){
-        this(size, "hat");
+    Hat(float size) {
+        this(size,"hat");
     }
-    Hat(){
+    Hat() {
         this(10.0f, "hat");
     }
-    public void close(){
-        System.out.println("closing har " + this + "named" + name);
+
+    public void close() {
+        System.out.println("closing hat " + this + " named " + name);
     }
 
     public boolean isOld() {
@@ -36,26 +38,16 @@ public class Hat implements AutoCloseable{
         isOld = old;
     }
 
-    public byte getAge() {
-        return age;
-    }
-
-    public void setAge(byte age) {
-        this.age = age;
-    }
-
-    public short getThreadCount() throws IllegalAccessException {
-        if (threadCount > 0) {
-            this.threadCount = threadCount;
-        } else {
-            throw new IllegalArgumentException("thread must be positive");
-        }
-
+    public short getThreadCount() {
         return threadCount;
     }
 
     public void setThreadCount(short threadCount) {
-        this.threadCount = threadCount;
+        if (threadCount < 0) {
+            this.threadCount = threadCount;
+        } else {
+            throw new IllegalArgumentException("thread count must be positive");
+        }
     }
 
     public int getPriceInCents() {

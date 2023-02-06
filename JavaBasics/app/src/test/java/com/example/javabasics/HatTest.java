@@ -13,23 +13,18 @@ public class HatTest {
     @Test
     public void isOldDefault() {
         Hat hat = new Hat();
-        assertFalse(hat.isOld());
-
+        assertTrue(hat.isOld());
     }
 
     @Test
-    public void setOldGetSet() {
+    public void isOldGetSet() {
         Hat hat = new Hat();
         hat.setOld(true);
         assertTrue(hat.isOld());
     }
 
     @Test
-    public void getAge() {
-    }
-
-    @Test
-    public void setAge() {
+    public void setOld() {
     }
 
     @Test
@@ -39,10 +34,17 @@ public class HatTest {
     }
 
     @Test
-    public void getThreadCountSet() {
+    public void setThreadCountOk() {
+        Hat hat = new Hat();
+        hat.setThreadCount((short) 33);
+        assertEquals(33, hat.getThreadCount());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void setThreadCountFail() {
         Hat hat = new Hat();
         hat.setThreadCount((short) -33);
-        hat
+        assertEquals(-33, hat.getThreadCount());
     }
 
     @Test
